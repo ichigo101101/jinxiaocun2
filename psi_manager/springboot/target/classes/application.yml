@@ -1,0 +1,32 @@
+server:
+  port: 9090 #数据库的端口
+
+# 数据库配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver #数据库驱动，名字固定
+    username: root   #你本地的数据库用户名
+    password: root #你本地的数据库密码
+    url: jdbc:mysql://localhost:3306/psi_manager?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8&allowPublicKeyRetrieval=true
+    #数据库地址，固定
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+# 配置mybatis实体和xml映射
+mybatis:
+  mapper-locations: classpath:mapper/*.xml #mybatis xml文件 sql语句文件的位置
+  type-aliases-package: com.example.entity #包的路径
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #sql的打印
+    map-underscore-to-camel-case: true #设置驼峰（mybatis默认不开驼峰），数据库总time_range会映射成timeRange
+
+# 分页
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+ip: localhost #本地开发配置localhost，如果是服务器ip，就配置服务器的ip地址
