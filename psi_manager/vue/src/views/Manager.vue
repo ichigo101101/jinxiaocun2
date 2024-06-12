@@ -84,6 +84,8 @@ export default {
     goToPerson() {
       if (this.user.role === 'ADMIN') {
         this.$router.push('/adminPerson')
+      }else if (this.user.role === 'STAFF') {
+        this.$router.push('/staffPerson')
       }
     },
     logout() {

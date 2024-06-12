@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import Staff from "@/views/manager/Staff";
+
 export default {
   name: "Register",
   data() {
@@ -41,7 +43,7 @@ export default {
       }
     }
     return {
-      form: {},
+      form: {role:"STAFF"},
       rules: {
         username: [
           { required: true, message: '请输入账号', trigger: 'blur' },

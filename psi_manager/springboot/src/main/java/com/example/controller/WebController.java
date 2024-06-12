@@ -121,8 +121,8 @@ public class WebController {
                 || ObjectUtil.isEmpty(account.getRole())) {
             return Result.error(ResultCodeEnum.PARAM_LOST_ERROR);
         }
-        if (RoleEnum.ADMIN.name().equals(account.getRole())) {
-            adminService.register(account);
+        if (RoleEnum.STAFF.name().equals(account.getRole())) {
+            staffService.register(account);
         }
         return Result.success();
     }
@@ -138,6 +138,8 @@ public class WebController {
         }
         if (RoleEnum.ADMIN.name().equals(account.getRole())) {
             adminService.updatePassword(account);
+        }else if (RoleEnum.STAFF.name().equals(account.getRole())) {
+            staffService.updatePassword(account);
         }
         return Result.success();
     }

@@ -5,6 +5,7 @@ import com.example.common.Constants;
 import com.example.common.enums.ResultCodeEnum;
 import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
+import com.example.entity.Admin;
 import com.example.entity.Staff;
 import com.example.entity.Staff;
 import com.example.exception.CustomException;
@@ -12,6 +13,7 @@ import com.example.mapper.StaffMapper;
 import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -96,6 +98,10 @@ public class StaffService {
         if (ObjectUtil.isNull(dbStaff)) {
             throw new CustomException(ResultCodeEnum.USER_NOT_EXIST_ERROR);
         }
+        if(dbStaff.getStatus()){
+            throw new CustomException(ResultCodeEnum.NO_AUTH);
+
+        }
         if (!account.getPassword().equals(dbStaff.getPassword())) {
             throw new CustomException(ResultCodeEnum.USER_ACCOUNT_ERROR);
         }
@@ -104,5 +110,26 @@ public class StaffService {
         String token = TokenUtils.createToken(tokenData, dbStaff.getPassword());
         dbStaff.setToken(token);
         return dbStaff;
+    }
+
+    /**
+     * 注册
+     */
+    public void register(Account account) {
+        Staff staff = new Staff();
+        BeanUtils.copyProperties(account, staff);
+        this.add(staff);
+    }
+
+    public void updatePassword(Account account) {
+        Staff staff = staffMapper.selectByUsername(account.getUsername());
+        if (ObjectUtil.isNull(staff)) {
+            throw new CustomException(ResultCodeEnum.USER_NOT_EXIST_ERROR);
+        }
+        if (!account.getPassword().equals(staff.getPassword())) {
+            throw new CustomException(ResultCodeEnum.PARAM_PASSWORD_ERROR);
+        }
+        staff.setPassword(account.getNewPassword());
+        staffMapper.updateById(staff);
     }
 }

@@ -15,6 +15,7 @@ public enum ResultCodeEnum {
     USER_NOT_EXIST_ERROR("5004", "用户不存在"),
     PARAM_PASSWORD_ERROR("5005", "原密码输入错误"),
     VALIDATE_CODE_ERROR("5006", "验证码错误"),
+    NO_AUTH("5007", "账号被禁用"),
 
     ;
 

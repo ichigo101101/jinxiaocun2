@@ -2,10 +2,14 @@ package com.example.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+@Component
 public class ValidateCodeCache {
 
     private static final Logger log = LoggerFactory.getLogger(ValidateCodeCache.class);
@@ -31,4 +35,18 @@ public class ValidateCodeCache {
         return codeCache.stream().anyMatch(cache -> cache.getKey().equals(key) && cache.getCode().equalsIgnoreCase(code));
     }
 
+    @Scheduled(fixedRate = 60000)//单位是毫秒，一分钟清理一次
+    public void task(){
+        log.info("==========开始清理验证码缓存，验证码集合缓存长度： + " + codeCache.size() +"==========");
+        List<CodeCache> codeList = codeCache.stream().filter(cache ->{
+            long timestamp = cache.getTimestamp();
+            long duration = System.currentTimeMillis() - timestamp;
+            return duration >120000;
+        }).collect(Collectors.toList());
+        codeCache.removeAll(codeList);
+        if(codeCache.size() >1024){
+            codeCache.clear();
+        }
+        log.info("==========清理验证码缓存结束，验证码集合缓存长度： + " + codeCache.size() +"==========");
+    }
 }

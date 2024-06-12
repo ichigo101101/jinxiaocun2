@@ -21,6 +21,15 @@ public class Account {
     private String token;
     private String key;
     private String code;
+    private Boolean status;
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
 
     public String getKey() {
         return key;
