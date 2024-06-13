@@ -16,6 +16,7 @@ public enum ResultCodeEnum {
     PARAM_PASSWORD_ERROR("5005", "原密码输入错误"),
     VALIDATE_CODE_ERROR("5006", "验证码错误"),
     NO_AUTH("5007", "账号被禁用"),
+    DATA_IMPORT_ERROR("5008", "数据导入错误"),
 
     ;
 

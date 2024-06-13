@@ -40,17 +40,25 @@
           </el-menu-item>
           <el-submenu index="info">
             <template slot="title">
-              <i class="el-icon-menu"></i><span>信息管理</span>
+              <i class="el-icon-menu"></i><span>基础信息</span>
             </template>
-            <el-menu-item index="/notice">公告信息</el-menu-item>
+            <el-menu-item index="/supplier">供应商信息</el-menu-item>
           </el-submenu>
+<!--          <el-submenu index="info">-->
+<!--            <template slot="title">-->
+<!--              <i class="el-icon-menu"></i><span>信息管理</span>-->
+<!--            </template>-->
+
+<!--          </el-submenu>-->
 
           <el-submenu index="user">
             <template slot="title">
-              <i class="el-icon-menu"></i><span>用户管理</span>
+              <i class="el-icon-menu"></i><span>系统管理</span>
             </template>
+            <el-menu-item index="/notice">公告信息</el-menu-item>
             <el-menu-item index="/admin">管理员信息</el-menu-item>
             <el-menu-item index="/staff">员工信息</el-menu-item>
+            <el-menu-item index="/department">部门信息</el-menu-item>
           </el-submenu>
         </el-menu>
       </div>
