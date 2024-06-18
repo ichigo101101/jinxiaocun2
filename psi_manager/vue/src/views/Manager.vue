@@ -43,6 +43,8 @@
               <i class="el-icon-menu"></i><span>基础信息</span>
             </template>
             <el-menu-item index="/supplier">供应商信息</el-menu-item>
+            <el-menu-item index="/customer">客户信息</el-menu-item>
+            <el-menu-item index="/goods">商品信息</el-menu-item>
           </el-submenu>
 <!--          <el-submenu index="info">-->
 <!--            <template slot="title">-->
