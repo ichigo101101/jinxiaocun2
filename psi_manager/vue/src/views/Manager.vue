@@ -51,6 +51,14 @@
               <i class="el-icon-menu"></i><span>商品进货管理</span>
             </template>
             <el-menu-item index="/stock">商品进货信息</el-menu-item>
+            <el-menu-item index="/back">商品退货查询</el-menu-item>
+          </el-submenu>
+          <el-submenu index="stockManager">
+            <template slot="title">
+              <i class="el-icon-menu"></i><span>商品销售管理</span>
+            </template>
+            <el-menu-item index="/sale">商品销售信息</el-menu-item>
+            <el-menu-item index="/saleBack">销售退货查询</el-menu-item>
           </el-submenu>
 
 
@@ -62,6 +70,7 @@
             <el-menu-item index="/admin">管理员信息</el-menu-item>
             <el-menu-item index="/staff">员工信息</el-menu-item>
             <el-menu-item index="/department">部门信息</el-menu-item>
+            <el-menu-item index="/logs">日志信息</el-menu-item>
           </el-submenu>
         </el-menu>
       </div>

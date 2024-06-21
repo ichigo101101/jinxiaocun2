@@ -30,14 +30,14 @@ public class StockService {
      */
     @Transactional
     public void add(Stock stock) {
-//        Account currentUser = TokenUtils.getCurrentUser();
-//        stock.setUser(currentUser.getName());
-//        stock.setTotal(stock.getPrice() * stock.getNum());
-//
-//        // 查询进货的商品信息
-//        Goods goods = goodsService.selectById(stock.getGoodsId());
-//        goods.setNum(goods.getNum() + stock.getNum());
-//        goodsService.updateById(goods);
+        Account currentUser = TokenUtils.getCurrentUser();
+        stock.setUser(currentUser.getName());
+        stock.setTotal(stock.getPrice() * stock.getNum());
+
+        // 查询进货的商品信息
+        Goods goods = goodsService.selectById(stock.getGoodsId());
+        goods.setNum(goods.getNum() + stock.getNum());
+        goodsService.updateById(goods);
 
         stockMapper.insert(stock);
 

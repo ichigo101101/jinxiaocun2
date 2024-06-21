@@ -13,6 +13,15 @@ public class Staff extends Account{
     private String birth;
     private Integer departmentId;
     private Boolean status;
+    private String departmentName;
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
 
     public Integer getId() {
         return id;

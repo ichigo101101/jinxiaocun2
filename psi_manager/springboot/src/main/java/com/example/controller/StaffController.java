@@ -1,9 +1,13 @@
 package com.example.controller;
 
 import com.example.common.Result;
+import com.example.entity.Account;
 import com.example.entity.Staff;
+import com.example.service.LogsService;
 import com.example.service.StaffService;
+import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageInfo;
+import org.apache.el.parser.Token;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
@@ -25,6 +29,8 @@ public class StaffController {
     @PostMapping("/add")
     public Result add(@RequestBody Staff staff) {
         staffService.add(staff);
+        Account currentUser = TokenUtils.getCurrentUser();
+        LogsService.recordLog("新增员工"+ staff.getUsername(),"新增",currentUser.getUsername());
         return Result.success();
     }
 
@@ -34,6 +40,9 @@ public class StaffController {
     @DeleteMapping("/delete/{id}")
     public Result deleteById(@PathVariable Integer id) {
         staffService.deleteById(id);
+        Account currentUser = TokenUtils.getCurrentUser();
+        Staff staff = staffService.selectById(id);
+        LogsService.recordLog("新增员工"+ staff.getUsername(),"删除",currentUser.getUsername());
         return Result.success();
     }
 
