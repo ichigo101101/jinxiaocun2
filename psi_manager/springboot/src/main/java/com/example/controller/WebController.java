@@ -199,8 +199,17 @@ public class WebController {
         dateRange = dateRange.stream().sorted((a, b) -> (int) (a.getTime() - b.getTime())).collect(Collectors.toList());
         List<Dict> list = new ArrayList<>();
         for (DateTime dateTime : dateRange) {
+
             String dateStr = DateUtil.formatDate(dateTime);// 把  datetime类型的数据转换成字符串
-            Double sum = saleList.stream().filter(sale -> sale.getTime() != null &&sale.getTime().contains(dateStr)).map(Sale::getTotal).reduce(Double::sum).orElse(0D);
+            List<Sale> saleList2 = saleList.stream()
+                    .filter(sale -> sale.getTime() != null &&sale.getTime().contains(dateStr)).collect(Collectors.toList());
+            if(saleList2 == null ){
+                continue;
+            }
+            Double sum = saleList2.stream()
+                    .map(Sale::getTotal)
+                    .reduce(Double::sum)
+                    .orElse(0D);
             Dict dict = Dict.create();
             dict.set("name", dateStr).set("value", sum);
             list.add(dict);

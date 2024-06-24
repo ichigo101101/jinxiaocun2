@@ -4,7 +4,7 @@
     <div class="manager-header">
       <div class="manager-header-left">
         <img src="@/assets/imgs/logo.png" />
-        <div class="title">企业进销存管理系统</div>
+        <div class="title">企业进销存管理</div>
       </div>
 
       <div class="manager-header-center">
@@ -62,7 +62,7 @@
           </el-submenu>
 
 
-          <el-submenu index="user">
+          <el-submenu index="user" v-if="user.role === 'ADMIN'">
             <template slot="title">
               <i class="el-icon-menu"></i><span>系统管理</span>
             </template>

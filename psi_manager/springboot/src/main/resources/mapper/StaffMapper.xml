@@ -34,6 +34,15 @@
         where id = #{id}
     </select>
 
+    <select id="selectByUsername" resultType="com.example.entity.Staff">
+        select
+            staff.*, department.name as departmentName
+        from staff
+                 left join department
+                           on staff.department_id = department.id
+        where staff.username = #{username}
+    </select>
+
     <delete id="deleteById">
         delete from staff
         where  id = #{id}
